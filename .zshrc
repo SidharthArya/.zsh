@@ -54,6 +54,7 @@ alias nvim="bash ~/.config/nvim/start.sh"
 
 # Office
 [[ -f "$HOME/.config/office/.zshrc" ]] && source "$HOME/.config/office/.zshrc"
+[[ -f "$HOME/.config/personal/.zshrc" ]] && source "$HOME/.config/personal/.zshrc"
 
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
