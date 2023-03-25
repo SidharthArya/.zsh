@@ -36,6 +36,7 @@ if [ $? -eq 0 ]; then
 else
     if [ -f "$HOME/.conda/etc/profile.d/conda.sh" ]; then
         . "$HOME/.conda/etc/profile.d/conda.sh"
+	conda config --set auto_activate_base false
     else
         export PATH="$HOME/.conda/bin:$PATH"
     fi
@@ -55,7 +56,6 @@ alias nvim="bash ~/.config/nvim/start.sh"
 # Office
 [[ -f "$HOME/.config/office/.zshrc" ]] && source "$HOME/.config/office/.zshrc"
 [[ -f "$HOME/.config/personal/.zshrc" ]] && source "$HOME/.config/personal/.zshrc"
-
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
