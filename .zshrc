@@ -63,4 +63,4 @@ eval "$(direnv hook zsh)"
 
 # tabtab source for electron-forge package
 # uninstall by removing these lines or running `tabtab uninstall electron-forge`
-[[ -f /Users/sidhartharya/.npm/_npx/6913fdfd1ea7a741/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /Users/sidhartharya/.npm/_npx/6913fdfd1ea7a741/node_modules/tabtab/.completions/electron-forge.zsh
+[[ -f /Users/sidhartharya/.npm/_npx/6913fdfd1ea7a741/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /Users/sidhartharya/.npm/_npx/6913fdfd1ea7a741/node_modules/tabtab/.completions/electron-forge.zshexport PATH=$PATH:/Users/sidhartharya/bin
