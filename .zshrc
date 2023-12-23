@@ -50,8 +50,6 @@ unset __conda_setup
 # Ruby
 [[ -e "$HOME/.rvm" ]] && source $HOME/.rvm/scripts/rvm
 #
-alias vim="bash ~/.config/nvim/start.sh"
-alias nvim="bash ~/.config/nvim/start.sh"
 
 # Office
 [[ -f "$HOME/.config/office/.zshrc" ]] && source "$HOME/.config/office/.zshrc"
