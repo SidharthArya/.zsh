@@ -28,21 +28,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/sidhartharya/.conda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "$HOME/.conda/etc/profile.d/conda.sh" ]; then
-        . "$HOME/.conda/etc/profile.d/conda.sh"
-	conda config --set auto_activate_base false
-    else
-        export PATH="$HOME/.conda/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
 #
 #
 #
@@ -59,12 +44,8 @@ unset __conda_setup
 export PATH="$PATH:$HOME/.rvm/bin"
 eval "$(direnv hook zsh)"
 
-# tabtab source for electron-forge package
-# uninstall by removing these lines or running `tabtab uninstall electron-forge`
-[[ -f /Users/sidhartharya/.npm/_npx/6913fdfd1ea7a741/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /Users/sidhartharya/.npm/_npx/6913fdfd1ea7a741/node_modules/tabtab/.completions/electron-forge.zshexport PATH=$PATH:/Users/sidhartharya/bin
-
 # pnpm
-export PNPM_HOME="/Users/sidhartharya/Library/pnpm"
+export PNPM_HOME="/home/temp/.pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -73,3 +54,11 @@ esac
 
 # To customize prompt, run `p10k configure` or edit ~/.files/.zsh/.p10k.zsh.
 [[ ! -f ~/.files/.zsh/.p10k.zsh ]] || source ~/.files/.zsh/.p10k.zsh
+
+if (( $+commands[zoxide] )); then
+  eval "$(zoxide init zsh)"
+else
+  return 1
+fi
+alias cd=z
+export PATH=$PATH:~/.conda/bin
