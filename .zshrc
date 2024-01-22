@@ -62,3 +62,10 @@ else
 fi
 alias cd=z
 export PATH=$PATH:~/.conda/bin
+
+# bun completions
+[ -s "/home/arya/.bun/_bun" ] && source "/home/arya/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
