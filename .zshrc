@@ -61,7 +61,6 @@ else
   return 1
 fi
 alias cd=z
-export PATH=$PATH:~/.conda/bin
 
 # bun completions
 [ -s "/home/arya/.bun/_bun" ] && source "/home/arya/.bun/_bun"
@@ -69,3 +68,19 @@ export PATH=$PATH:~/.conda/bin
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/arya/.conda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/arya/.conda/etc/profile.d/conda.sh" ]; then
+        . "/home/arya/.conda/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/arya/.conda/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
