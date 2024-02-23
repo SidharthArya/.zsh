@@ -83,4 +83,6 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
+export PATH=~/.local/bin:$PATH
+alias sdkmanager=~/.android/cmdline-tools/bin/sdkmanager' --sdk_root=/home/arya/.android'
+# export PATH=~/.android/cmdline-tools/bin:$PATH
