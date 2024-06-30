@@ -3,7 +3,6 @@
 ARG1=$1
 
 install () {
-ln -s ~/.config/zsh/zshrc ~/.zshrc
 ln -s ~/.config/zsh/zshenv ~/.zshenv
 }
 
