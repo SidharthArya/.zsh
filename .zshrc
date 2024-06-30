@@ -17,6 +17,9 @@ zplug load
 # Direnv
 eval "$(direnv hook zsh)"
 
+# Zoxide
+eval "$(zoxide init zsh)"
+alias cd=z
 
 zstyle ':completion:*' menu select
 setopt complete_in_word
