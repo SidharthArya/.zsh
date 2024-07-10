@@ -1,0 +1,5 @@
+activate() {
+. "$HOME/.cargo/env"
+}
+
+$1
