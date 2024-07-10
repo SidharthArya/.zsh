@@ -19,7 +19,20 @@ eval "$(direnv hook zsh)"
 
 # Zoxide
 eval "$(zoxide init zsh)"
-alias cd=z
+alias nnn='m a nnn; nnn -x -g'
+alias tmux='tmux -u'
+alias source_modules='source ~/.config/zsh/modules.sh'
+alias hm='home-manager'
+alias flake='nix flake'
+alias code='code --ozone-platform=wayland'
+alias cd='z'
+
+# Functions
+flaker ()
+{
+  nix flake init -t ~/.config/flake-templates#${1};
+}
+
 
 zstyle ':completion:*' menu select
 setopt complete_in_word
