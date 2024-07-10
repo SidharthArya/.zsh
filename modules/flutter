@@ -1,0 +1,12 @@
+activate() {
+    export PATH=~/.local/share/flutter/bin:$PATH
+    export PATH=~/.config/Android/Sdk/cmdline-tools/latest/bin:$PATH
+    export PATH=~/.config/Android/Sdk/platform-tools/:$PATH
+    export PATH="$PATH":"$HOME/.pub-cache/bin"
+}
+
+deactivate () {
+    export PATH=`echo $PATH | tr ":" "\n" | grep -v "flutter" | tr "\n" ":"`
+    export PATH=`echo $PATH | tr ":" "\n" | grep -v "Android" | tr "\n" ":"`
+}
+$1
