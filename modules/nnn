@@ -1,0 +1,6 @@
+activate() {
+  source ~/.config/nnn/file_manager.sh
+  alias nnn='nnn -x -g'
+}
+
+$1
