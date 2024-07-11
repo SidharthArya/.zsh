@@ -18,11 +18,13 @@ zplug load
 eval "$(direnv hook zsh)"
 
 # Zoxide
+#
 eval "$(zoxide init zsh)"
 alias nnn='m a nnn; nnn -x -g'
 alias tmux='tmux -u'
 alias source_modules='source ~/.config/zsh/modules.sh'
 alias hm='home-manager'
+alias ls='lsd'
 alias flake='nix flake'
 alias code='code --ozone-platform=wayland'
 alias cd='z'
@@ -38,4 +40,8 @@ zstyle ':completion:*' menu select
 setopt complete_in_word
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 
+
+bindkey "^X" kill-whole-line
+bindkey -s "^[l" ~/.config/zsh/utils/fzfopen.sh'^M'
+bindkey -s "^[z" 'cd $(zoxide query -i) ^M'
 source ~/.config/zsh/modules.sh
