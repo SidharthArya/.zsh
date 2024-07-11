@@ -44,4 +44,5 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 bindkey "^X" kill-whole-line
 bindkey -s "^[l" ~/.config/zsh/utils/fzfopen.sh'^M'
 bindkey -s "^[z" 'cd $(zoxide query -i) ^M'
+bindkey -s "^[g" 'lazygit^M'
 source ~/.config/zsh/modules.sh
