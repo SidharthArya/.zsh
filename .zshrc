@@ -13,7 +13,7 @@ zplug load
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 # Direnv
 eval "$(direnv hook zsh)"
 
@@ -42,7 +42,8 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 
 
 bindkey "^X" kill-whole-line
-bindkey -s "^[l" ~/.config/zsh/utils/fzfopen.sh'^M'
+bindkey -s "^[l" '. '~/.config/zsh/utils/fzfopen.sh'^M'
 bindkey -s "^[z" 'cd $(zoxide query -i) ^M'
 bindkey -s "^[g" 'lazygit^M'
+bindkey -s "^[h" "history 0 | awk '{\$1=\"\"}1' | fzf | wl-copy"
 source ~/.config/zsh/modules.sh
