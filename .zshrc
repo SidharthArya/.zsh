@@ -25,10 +25,13 @@ alias tmux='tmux -u'
 alias source_modules='source ~/.config/zsh/modules.sh'
 alias hm='home-manager'
 alias ls='lsd'
+alias lg='lazygit'
 alias flake='nix flake'
 alias code='code --ozone-platform=wayland'
 alias cd='z'
-
+t_convertvidtogif () {
+  ffmpeg -ss 30 -t 3 -i $1 -vf "fps=10,scale=320:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 $2
+}
 # Functions
 flaker ()
 {
@@ -45,5 +48,6 @@ bindkey "^X" kill-whole-line
 bindkey -s "^[l" '. '~/.config/zsh/utils/fzfopen.sh'^M'
 bindkey -s "^[z" 'cd $(zoxide query -i) ^M'
 bindkey -s "^[g" 'lazygit^M'
-bindkey -s "^[h" "history 0 | awk '{\$1=\"\"}1' | fzf | wl-copy"
+bindkey -s "^[h" "history 0 | awk '{\$1=\"\"}1' | fzf | wl-copy^M"
+bindkey -s "^[n" "nnn^M"
 source ~/.config/zsh/modules.sh
