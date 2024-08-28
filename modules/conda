@@ -1,0 +1,8 @@
+## PyEnv
+
+activate() {
+export CONDA_ROOT="$HOME/.local/share/conda"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$CONDA_ROOT/bin:$PATH"
+}
+
+$1
