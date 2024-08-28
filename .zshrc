@@ -6,23 +6,26 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 source ~/.cache/zplug/init.zsh
-zplug romkatv/powerlevel10k, as:theme, depth:1
+# zplug romkatv/powerlevel10k, as:theme, depth:1
+source ~/.cache/powerlevel10k/powerlevel10k.zsh-theme
+source ~/.cache/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 zplug zsh-users/zsh-autosuggestions
-export ZSH_AUTOSUGGEST_STRATEGY=history
 zplug load
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 # Direnv
 eval "$(direnv hook zsh)"
 
 # Zoxide
 #
+alias source_modules='source ~/.config/zsh/modules.sh'
+source_modules
 eval "$(zoxide init zsh)"
 alias nnn='m a nnn; nnn -x -g'
 alias tmux='tmux -u'
-alias source_modules='source ~/.config/zsh/modules.sh'
+
 alias hm='home-manager'
 alias ls='lsd'
 alias lg='lazygit'
@@ -51,3 +54,21 @@ bindkey -s "^[g" 'lazygit^M'
 bindkey -s "^[h" "history 0 | awk '{\$1=\"\"}1' | fzf | wl-copy^M"
 bindkey -s "^[n" "nnn^M"
 source ~/.config/zsh/modules.sh
+
+# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/arya/.local/share/conda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/arya/.local/share/conda/etc/profile.d/conda.sh" ]; then
+        . "/home/arya/.local/share/conda/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/arya/.local/share/conda/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
