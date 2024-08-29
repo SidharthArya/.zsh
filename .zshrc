@@ -1,16 +1,24 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
+#
+#
+#
+alias plugins=~/.config/zsh/plugins.sh
+
+plugins powerlevel10k https://github.com/romkatv/powerlevel10k.git
+plugins zsh-autsuggestions https://github.com/zsh-users/zsh-autosuggestions 
+
+
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-
-source ~/.cache/zplug/init.zsh
+source ~/.cache/zsh/powerlevel10k/powerlevel10k.zsh-theme 
+# source ~/.cache/zplug/init.zsh
 # zplug romkatv/powerlevel10k, as:theme, depth:1
-source ~/.cache/powerlevel10k/powerlevel10k.zsh-theme
-source ~/.cache/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-zplug zsh-users/zsh-autosuggestions
-zplug load
+#
+#
+source ~/.cache/zsh/zsh-autsuggestions/zsh-autosuggestions.zsh 
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
