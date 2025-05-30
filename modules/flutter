@@ -1,5 +1,5 @@
 activate() {
-    export PATH=~/.local/share/flutter/bin:$PATH
+    export PATH=~/.local/opt/flutter/bin:$PATH
     export PATH=~/.config/Android/Sdk/cmdline-tools/latest/bin:$PATH
     export PATH=~/.config/Android/Sdk/platform-tools/:$PATH
     export PATH="$PATH":"$HOME/.pub-cache/bin"

@@ -36,6 +36,8 @@ alias tmux='tmux -u'
 
 alias hm='home-manager'
 alias ls='lsd'
+alias l='lsd'
+
 alias lg='lazygit'
 alias flake='nix flake'
 alias code='code --ozone-platform=wayland'
@@ -79,4 +81,12 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+export PATH=$PATH:~/.local/bin
 
+[ -f ~/.config/zsh/work.sh ] && source ~/.config/zsh/work.sh
+function killgrep() {
+ps aux | grep $1 | awk '{print $2}' | xargs -I{} sudo kill {}
+}
+
+ # source "$HOME/.rye/env"
+ #
