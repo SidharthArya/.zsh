@@ -22,6 +22,7 @@ source_modules
 eval "$(zoxide init zsh)"
 alias nnn='m a nnn; nnn -x -g'
 alias tmux='tmux -u'
+alias zen=~/.local/opt/zen/zen
 alias hm='home-manager'
 alias ls='lsd'
 alias l='lsd'
