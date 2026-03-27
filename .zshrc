@@ -60,3 +60,27 @@ export PATH=$PATH:~/.local/bin
 function killgrep() {
 ps aux | grep $1 | awk '{print $2}' | xargs -I{} sudo kill {}
 }
+
+. "$HOME/.local/share/../bin/env"
+
+# opencode
+export PATH=/home/arya/.opencode/bin:$PATH
+
+
+export WINEPREFIX=~/Windows
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/arya/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/arya/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/arya/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/arya/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+conda config --set auto_activate_base false
