@@ -9,3 +9,5 @@ alias ls='ls --color=auto'
 # export PATH="/usr/local/bin:/usr/bin:/bin"
 
 if [ -e /home/arya/.nix-profile/etc/profile.d/nix.sh ]; then . /home/arya/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+

@@ -1,12 +1,44 @@
+#!/usr/bin/env zsh
+OPT_DIR="${HOME}/.local/opt"
+FLUTTER_DIR="$OPT_DIR/flutter"
+source $HOME/.config/zsh/modules/android activate
+
+
 activate() {
-    export PATH=~/.local/opt/flutter/bin:$PATH
+    export PATH=$FLUTTER_DIR/bin:$PATH
+    export FLUTTER_DIR=$FLUTTER_DIR
     export PATH=~/.config/Android/Sdk/cmdline-tools/latest/bin:$PATH
     export PATH=~/.config/Android/Sdk/platform-tools/:$PATH
     export PATH="$PATH":"$HOME/.pub-cache/bin"
+    export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
 }
 
 deactivate () {
     export PATH=`echo $PATH | tr ":" "\n" | grep -v "flutter" | tr "\n" ":"`
     export PATH=`echo $PATH | tr ":" "\n" | grep -v "Android" | tr "\n" ":"`
+}
+
+
+install () {
+  set -euo pipefail
+  TMP_DIR=/tmp
+  RELEASE_JSON="${TMP_DIR}/flutter_releases.json"
+  echo "Installing prerequisites..."
+  OS=$(uname -s)
+
+  command -v curl 2>&1 1>/dev/null ||
+  if [[ $OS == 'Linux' ]]; then
+    (command -v pacman  1>/dev/null && sudo pacman -S curl cmake ninja) || (command -v apt && apt-get update && apt-get install curl )
+
+  fi
+  if ! [ -d $FLUTTER_DIR ]; then
+  ls $RELEASE_JSON 2>/dev/null 1>/dev/null || ( [[ $OS == 'Linux' ]] && curl -fsSL "https://storage.googleapis.com/flutter_infra_release/releases/releases_linux.json" -o "$RELEASE_JSON")
+  STABLE_HASH=$(jq -r '.current_release.stable' $RELEASE_JSON)
+  VERSION=$(jq -r --arg hash "$STABLE_HASH" '.releases[] | select(.hash == $hash) | .version' /tmp/flutter_releases.json)
+  ARCHIVE=$TMP_DIR/flutter_$VERSION.tar.xz
+  [[ $OS == 'Linux' ]] &&  curl -C - -fL https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_${VERSION}-stable.tar.xz -o $ARCHIVE
+  [[ $OS == 'Linux' ]] && [[ -d $FLUTTER_DIR ]] || tar -xvf $ARCHIVE -C $OPT_DIR
+  $HOME/.config/zsh/modules/android install
+  fi
 }
 $1

@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+ANDROID_ROOT=$HOME/Android
+ANDROID_SDK_ROOT="${ANDROID_SDK_ROOT:-$ANDROID_ROOT/Sdk}"
+ANDROID_CMDLINE_TOOLS=$ANDROID_SDK_ROOT/cmdline-tools
+ANDROID_PLATFORM_TOOLS=$ANDROID_SDK_ROOT/platform-tools
+activate() {
+  export PATH="$ANDROID_CMDLINE_TOOLS/latest/bin:$ANDROID_PLATFORM_TOOLS:$PATH"
+  export ANDROID_HOME=$ANDROID_SDK_ROOT
+  export ANDROID_SDK_ROOT=$ANDROID_SDK_ROOT
+  
+}
+
+deactivate() {
+  # export $PATH=$ANDROID_CMDLINE_TOOLS/bin:$PATH
+  export PATH=`echo $PATH | tr ":" "\n" | grep -v "Android" | tr "\n" ":"`
+}
+
+install() {
+  set -euo pipefail
+  echo "Installing Android Tools"
+  REPO_XML_URL="https://dl.google.com/android/repository/repository2-1.xml"
+  REPO_XML=/tmp/android_repo.xml
+  ARCHIVE_NAME=$(curl -C - -fsSL "$REPO_XML_URL" -o "$REPO_XML"
+
+   for pkg in $(xmllint --xpath '//*[local-name()="remotePackage"][starts-with(@path, "cmdline-tools;")]/@path' /tmp/android_repo.xml | sed 's/path="/\n/g' | sed 's/"//g' | sed '/^$/d'); do
+
+  major=$(xmllint --xpath "string(//*[local-name()='remotePackage'][@path='$pkg']/*[local-name()='revision']/*[local-name()='major'])" /tmp/android_repo.xml)
+  minor=$(xmllint --xpath "string(//*[local-name()='remotePackage'][@path='$pkg']/*[local-name()='revision']/*[local-name()='minor'])" /tmp/android_repo.xml)
+  micro=$(xmllint --xpath "string(//*[local-name()='remotePackage'][@path='$pkg']/*[local-name()='revision']/*[local-name()='micro'])" /tmp/android_repo.xml)
+  url=$(xmllint --xpath "string(//*[local-name()='remotePackage'][@path='$pkg']/*[local-name()='archives']/*[local-name()='archive'][*[local-name()='host-os']='linux'][1]/*[local-name()='complete']/*[local-name
+()='url'])" /tmp/android_repo.xml)
+
+  [[ -n "$url" ]] && echo "${major}|${minor}|${micro}|${url}"
+done| sort -t'|' -k1,1n -k2,2n -k3,3n | tail -n1 | awk -F\| '{print $4 }')
+  
+
+  ARCHIVE=/tmp/$ARCHIVE_NAME
+  CMDLINE_TOOLS_URL="${CMDLINE_TOOLS_URL:-https://dl.google.com/android/repository/$ARCHIVE_NAME}"
+  [ -d $ANDROID_SDK_ROOT ] || (curl  --http1.1  -C - -fL $CMDLINE_TOOLS_URL -o $ARCHIVE; mkdir -p $ANDROID_SDK_ROOT/cmdline-tools/latest; unzip -d $ANDROID_SDK_ROOT $ARCHIVE; mv $ANDROID_SDK_ROOT/cmdline-tools/* $ANDROID_SDK_ROOT/cmdline-tools/latest || echo "Installed")
+  activate
+  yes | sdkmanager --install platform-tools
+  flutter config --android-sdk $ANDROID_SDK_ROOT
+
+
+}
+
+platform() {
+  ARG2=$1
+  echo $ARG2
+  activate
+  sdkmanager --install "platforms;android-${ARG2}"
+  sdkmanager --install "$(sdkmanager --list | grep -E 'build-tools;34\.[0-9]+\.[0-9]+'  | grep -v rc | tail -n 1 | awk '{print $1}' )"
+}
+
+$@
