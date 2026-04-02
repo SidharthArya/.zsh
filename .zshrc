@@ -1,14 +1,14 @@
 alias plugins=~/.config/zsh/plugins.sh
 
 # List of plugins
-plugins powerlevel10k https://github.com/romkatv/powerlevel10k.git
+# plugins powerlevel10k https://github.com/romkatv/powerlevel10k.git
 plugins zsh-autsuggestions https://github.com/zsh-users/zsh-autosuggestions 
 
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-source ~/.cache/zsh/powerlevel10k/powerlevel10k.zsh-theme 
+# source ~/.cache/zsh/powerlevel10k/powerlevel10k.zsh-theme 
 source ~/.cache/zsh/zsh-autsuggestions/zsh-autosuggestions.zsh 
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -22,11 +22,12 @@ source_modules
 eval "$(zoxide init zsh)"
 alias nnn='m a nnn; nnn -x -g'
 alias tmux='tmux -u'
+alias ps='grc --colour=on ps'
 alias zen=~/.local/opt/zen/zen
 alias hm='home-manager'
-alias ls='lsd'
-alias l='lsd'
-
+alias ls='eza --icons'
+alias l='eza --icons'
+alias less='less -r'
 alias lg='lazygit'
 alias flake='nix flake'
 alias code='code --ozone-platform=wayland'
@@ -61,10 +62,14 @@ function killgrep() {
 ps aux | grep $1 | awk '{print $2}' | xargs -I{} sudo kill {}
 }
 
-. "$HOME/.local/share/../bin/env"
+# . "$HOME/.local/share/../bin/env"
 
 # opencode
 export PATH=/home/arya/.opencode/bin:$PATH
 
 
 export WINEPREFIX=~/Windows
+
+eval "$(starship init zsh)"
+export STARSHIP_CONFIG=~/.config/zsh/starship.toml
+
