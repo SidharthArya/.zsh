@@ -1,18 +1,18 @@
 ## PyEnv
 
 activate() {
-export CONDA_ROOT="$HOME/.local/share/conda"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$CONDA_ROOT/bin:$PATH"
-__conda_setup="$('$HOME/.local/share/conda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "$HOME/.local/share/conda/etc/profile.d/conda.sh" ]; then
-        . "$HOME/.local/share/conda/etc/profile.d/conda.sh"
-    else
-        export PATH="$HOME/.local/share/conda/bin:$PATH"
-    fi
-fi
-unset __conda_setup
+  export CONDA_ROOT="$HOME/.local/share/conda"
+  [[ -d $PYENV_ROOT/bin ]] && export PATH="$CONDA_ROOT/bin:$PATH"
+  __conda_setup="$('$HOME/.local/share/conda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+  if [ $? -eq 0 ]; then
+      eval "$__conda_setup"
+  else
+      if [ -f "$HOME/.local/share/conda/etc/profile.d/conda.sh" ]; then
+          . "$HOME/.local/share/conda/etc/profile.d/conda.sh"
+      else
+          export PATH="$HOME/.local/share/conda/bin:$PATH"
+      fi
+  fi
+  unset __conda_setup
 }
 $1
